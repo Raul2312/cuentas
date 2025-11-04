@@ -9,8 +9,11 @@ class Account extends Model
        protected$table="accounts";
        protected $fillable = [
         'name',
-        'email',
-        'password',
-        'img',
+        'ammount',
+        'status',
+        'user_id',
     ];
+    public function user(){
+        return $this->hasOne(User::class,'id','user_id');
+    }
 }
