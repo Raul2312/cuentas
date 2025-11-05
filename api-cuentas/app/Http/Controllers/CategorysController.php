@@ -34,7 +34,19 @@ class CategorysController extends Controller
      */
     public function store(Request $request)
     {
-        //
+           $validated= $request->validate([
+            'name'=>'required|string|min:2',
+            'type'=>'required|string',
+            'user_id'=>'required'
+        ]);
+        $data = Category::create($validated);
+         return response()->json([
+            "status"=>"ok",
+            "message"=>"Categoria Insertada Correctamente",
+            "data"=>$data
+
+        ]);
+        
     }
 
     /**
@@ -42,7 +54,22 @@ class CategorysController extends Controller
      */
     public function show(string $id)
     {
-        //
+         $data = Category::find($id);
+        if($data){
+            return response()->json([
+            "status"=>"ok",
+            "message"=>"Categoria encontrada",
+            "data"=>$data
+            
+
+        ]);
+        }
+         return response()->json([
+            "status"=>"error",
+            "message"=>"Categoria no encontrada"
+            
+
+        ],400);
     }
 
     /**
@@ -58,7 +85,20 @@ class CategorysController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+          $validated= $request->validate([
+            'name'=>'required|string',
+            'type'=>'required|string',
+            'user_id'=>'required'
+        ]);
+        $data= Category::findOrFail($id);
+        $data -> update($validated);
+      //  $data = Account::update($validated);
+         return response()->json([
+            "status"=>"ok",
+            "message"=>"Categoria actualizada Correctamente",
+            "data"=>$data
+
+        ]);
     }
 
     /**
@@ -66,6 +106,17 @@ class CategorysController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+          $data = Category::find($id);
+        if($data){
+            $data->delete();
+        }
+         return response()->json([
+            "status"=>"ok",
+            "message"=>"Categoria eliminada Correctamente"
+            
+
+        ]);
     }
+
+   
 }
