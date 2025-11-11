@@ -9,12 +9,15 @@ use App\Http\Controllers\AuthController;
 
 Route::post('/login',[AuthController::class,'login']);
 
+Route::middleware("jwt")->group(function(){
+
 Route::resource('accounts',Accountscontroller::class);
 Route::post('changestatus',[AccountsController::class,'changestatus']);
 Route::resource('category',CategorysController::class);
 Route::resource('transaction',TransactionsController::class);
 
+});
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+//ENDPOINT
+
+
