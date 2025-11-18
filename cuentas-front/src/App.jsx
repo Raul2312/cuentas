@@ -1,36 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import ItemComponent from './components/itemComponent'
-import Button from 'react-bootstrap/Button';
+import{Route,Routes, BrowserRouter} from 'react-router-dom'
+import Home from './views/Home'
+import Login from './views/Login'
+export default function App(){
 
-function App() {
- var x=0
- //REACT HOOKS
- let [contador,setContador]= useState(10)
-
- let [arr,setArr]= useState([])
-
- let clickBoton= ()=>{
-setContador(++contador)
-  console.log(contador)
- let x=[...arr,contador]
- setArr(x)
- }
-
-  return (
-    <>
-    <h1>Contador</h1>
-    <Button variant="danger">Danger</Button>
-    <p>{contador}</p>
-    <button onClick={clickBoton}>Aumentar</button>
-    { arr.map((item)=>(<ItemComponent key={item}/> )) }
-    
-    
-
-    </>
+  return(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home /> } />
+        <Route path='/login' element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
-
-export default App

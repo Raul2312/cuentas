@@ -12,11 +12,10 @@ class CategorysController extends Controller
      */
     public function index()
     {
-                $data = Category::with(['user'])->get();
-
-        return response()->json([
-            "status"=>"ok",
-            "data"=>$data
+            $data = Category::with(['user'])->get();
+            return response()->json([
+                "status"=>"ok",
+                "data"=>$data
 
         ]);
     }
