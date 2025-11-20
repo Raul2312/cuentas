@@ -2,6 +2,8 @@ import './App.css'
 import{Route,Routes, BrowserRouter} from 'react-router-dom'
 import Home from './views/Home'
 import Login from './views/Login'
+import Dashboard from './views/dashboard'
+import Users from './views/users'
 export default function App(){
 
   return(
@@ -9,6 +11,11 @@ export default function App(){
       <Routes>
         <Route path="/" element={<Home /> } />
         <Route path='/login' element={<Login />} />
+        <Route path='/admin' element={<Dashboard/>} >
+              <Route index element={<Home/>}/>
+              <Route path='users' element={<Users/>}/>
+
+        </Route>
       </Routes>
     </BrowserRouter>
   )
